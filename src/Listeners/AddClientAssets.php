@@ -30,6 +30,7 @@ class AddClientAssets
         $events->listen(ConfigureWebApp::class, [$this, 'configureWebApp']);
         $events->listen(ConfigureLocales::class, [$this, 'addLocales']);
     }
+    
     /**
      * Modifies the client view for forum/admin.
      *
@@ -52,6 +53,7 @@ class AddClientAssets
             $event->addBootstrapper('zreflar/uncache/main');
         }
     }
+    
     /**
      * Provides i18n files.
      *
