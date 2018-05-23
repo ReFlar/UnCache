@@ -11,7 +11,7 @@ reflar-uncache:
         zoneid: Zone ID
         zoneid_help: This is the id of your domain which can be found in the "Overview" tab
         apikey: API Key
-        apihelp: Your Api key can be found by going to "My Profile" (top right corner), scrolling down and clicking the "View" button next to "Global API Key"
+        apikeyhelp: Your Api key can be found by going to "My Profile" (top right corner), scrolling down and clicking the "View" button next to "Global API Key"
         email: Email
         emailhelp: This is the email you use to login to Cloudflare
     nav:
