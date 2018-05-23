@@ -77,6 +77,7 @@ System.register('reflar/uncache/components/SettingsPage', ['flarum/components/Al
                                         app.alerts.dismiss(_this3.successAlert);
                                         app.request({
                                             url: app.forum.attribute('apiUrl') + '/uncache/invalidate',
+                                            errorHandler: _this3.onerror.bind(_this3),
                                             method: 'POST'
                                         }).then(function () {
                                             app.alerts.show(_this3.successAlert = new Alert({
@@ -155,6 +156,7 @@ System.register('reflar/uncache/components/SettingsPage', ['flarum/components/Al
                                                     className: 'FormControl uncache-settings-input',
                                                     value: this.values.cloudflare_email() || '',
                                                     placeholder: 'example@gmail.com',
+                                                    type: 'email',
                                                     oninput: m.withAttr('value', this.values.cloudflare_email)
                                                 })
                                             ),
@@ -170,6 +172,23 @@ System.register('reflar/uncache/components/SettingsPage', ['flarum/components/Al
                                 )
                             )
                         );
+                    }
+                }, {
+                    key: 'onerror',
+                    value: function onerror(e) {
+                        if (e.responseText.includes('Unable to purge')) {
+                            app.alerts.show(this.successAlert = new Alert({
+                                type: 'warning',
+                                children: app.translator.trans('reflar-uncache.admin.page.warning')
+                            }));
+                        } else if (e.responseText.includes('failed to open stream: No such file or directory')) {
+                            app.alerts.show(this.successAlert = new Alert({
+                                type: 'error',
+                                children: app.translator.trans('reflar-uncache.admin.page.error')
+                            }));
+                        } else {
+                            throw e;
+                        }
                     }
                 }, {
                     key: 'changed',

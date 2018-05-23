@@ -1,6 +1,8 @@
 reflar-uncache:
   admin:
     page:
+      warning: Your Cloudflare cache could not be cleared, the local cache was cleared.
+      error: You can't clear your cache twice
       title: Invalidate Cache
       helptext: Manually clear cache, useful for running after updating an extension, or adding custom css.
       button: Clear Cache

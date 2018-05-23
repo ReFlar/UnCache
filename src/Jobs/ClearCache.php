@@ -53,7 +53,7 @@ class ClearCache
     {
         $files = $this->getAssetUrls();
 
-        @unlink(base_path('assets/rev-manifest.json'));
+        @unlink(base_path($this->getAssetDirForPlatform().'rev-manifest.json'));
 
         $this->forum->getAssets()->flush();
         $this->admin->getAssets()->flush();
@@ -84,16 +84,24 @@ class ClearCache
 
     public function getAssetUrls()
     {
-        $files = json_decode(file_get_contents(base_path('assets\rev-manifest.json')), true);
+        $files = json_decode(file_get_contents(base_path($this->getAssetDirForPlatform().'rev-manifest.json')), true);
 
         foreach ($files as $key => $file) {
             $place = strstr($key, '.', true);
             $type = strstr($key, '.');
             $file = $place.'-'.$file.$type;
-            @unlink(base_path("assets/$file"));
+            @unlink(base_path($this->getAssetDirForPlatform().$file));
             $files[$key] = app('flarum.config')['url'].'/assets/'.$file;
         }
 
         return array_values($files);
+    }
+
+    public function getAssetDirForPlatform() {
+        if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN') {
+            return 'assets\\';
+        } else {
+            return 'assets/';
+        }
     }
 }

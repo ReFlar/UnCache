@@ -50,6 +50,7 @@ export default class SettingsPage extends Page {
                             app.alerts.dismiss(this.successAlert);
                             app.request({
                                 url: app.forum.attribute('apiUrl') + '/uncache/invalidate',
+                                errorHandler: this.onerror.bind(this),
                                 method: 'POST'
                             }).then(() => {
                                 app.alerts.show(this.successAlert = new Alert({
@@ -111,6 +112,21 @@ export default class SettingsPage extends Page {
         )
     }
 
+    onerror(e) {
+        if (e.responseText.includes('Unable to purge')) {
+            app.alerts.show(this.successAlert = new Alert({
+                type: 'warning',
+                children: app.translator.trans('reflar-uncache.admin.page.warning')
+            }));
+        } else if (e.responseText.includes('failed to open stream: No such file or directory')) {
+            app.alerts.show(this.successAlert = new Alert({
+                type: 'error',
+                children: app.translator.trans('reflar-uncache.admin.page.error')
+            }));
+        } else {
+            throw e;
+        }
+    }
 
     /**
      * @returns boolean

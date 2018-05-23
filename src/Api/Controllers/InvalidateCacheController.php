@@ -1,5 +1,4 @@
 <?php
-
 /**
  *  This file is part of reflar/uncache.
  *
@@ -26,7 +25,7 @@ class InvalidateCacheController extends AbstractResourceController
     /**
      * {@inheritdoc}
      */
-    public $serializer = 'Flarum\Api\Serializer\UserSerializer';
+    public $serializer = 'Reflar\UnCache\Api\Serializers\CloudflareSerializer';
 
     /**
      * @param ServerRequestInterface $request
