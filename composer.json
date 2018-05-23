@@ -1,0 +1,43 @@
+{
+  "name": "reflar/uncache",
+  "description": "No more cache related problems!",
+  "keywords": [
+    "flarum",
+	"reflar",
+	"cache",
+	"uncache",
+	"clear"
+  ],
+  "type": "flarum-extension",
+  "license": "MIT",
+  "require": {
+    "flarum/core": "^0.1.0-beta-7.1",
+    "guzzlehttp/guzzle": "^6.2.2"
+  },
+  "authors": [
+    {
+      "name": "CDK2020",
+      "email": "CDK2020@reflar.email",
+      "homepage": "https://redevs.org",
+      "role": "Developer"
+    }
+  ],
+  "autoload": {
+    "psr-4": {
+      "Reflar\\UnCache\\": "src/"
+    }
+  },
+  "extra": {
+    "flarum-extension": {
+      "title": "ReFlar UnCache",
+      "icon": {
+        "name": "archive",
+        "backgroundColor": "#263238",
+        "color": "#fff"
+      }
+    },
+    "flagrow": {
+      "discuss": ""
+    }
+  }
+}

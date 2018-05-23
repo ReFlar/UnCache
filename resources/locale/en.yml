@@ -1,0 +1,18 @@
+reflar-uncache:
+  admin:
+    page:
+      title: Invalidate Cache
+      helptext: Manually clear cache, useful for running after updating an extension, or adding custom css.
+      button: Clear Cache
+      success: Cache successfully cleared
+      cloudflare:
+        title: Cloudflare Settings
+        enable: Enable Cloudflare integration
+        zoneid: Zone ID
+        zoneid_help: This is the id of your domain which can be found in the "Overview" tab
+        apikey: API Key
+        apihelp: Your Api key can be found by going to "My Profile" (top right corner), scrolling down and clicking the "View" button next to "Global API Key"
+        email: Email
+        emailhelp: This is the email you use to login to Cloudflare
+    nav:
+      desc: Invalidate the cache, and setup Cloudflare
