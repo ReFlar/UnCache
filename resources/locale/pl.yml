@@ -1,0 +1,20 @@
+reflar-uncache:
+  admin:
+    page:
+      warning: Pamięć podręczna Cloudflare nie została wyczyszczona, lokalna pamięć została wyczyszczona.
+      error: Pamięć podręczna nie może zostać wyczyszczona 2 razy
+      title: Usuń pamięć podręczną
+      helptext: Ręcznie usuwaj pamięć podręczną, przydatne do działania po aktualizacji rozszerzeń bądź niestandardowego stylu css.
+      button: Wyczyść pamięć podręczną
+      success: Pamięć podręczna została pomyslnie usunięta
+      cloudflare:
+        title: Ustawienia Cloudflare
+        enable: Włącz integrację Cloudflare
+        zoneid: ID strefy
+        zoneid_help: Jest to identyfikator Twojej domeny, którą możesz znaleźć w zakładce "Przegląd"
+        apikey: Klucz API
+        apikeyhelp: Twój klucz API możesz znaleźć wchodząc do "Mój profil" przewijając w dół i klikając przycisk "Widok" obok "Globalny klucz API"
+        email: Adres email
+        emailhelp: Podaj adres email którego używasz podczas logowania do Cloudflare
+    nav:
+      desc: Usuń pamięć podręczną i skonfiguruj Cloudflare
