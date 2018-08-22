@@ -20,6 +20,7 @@ class CloudflareSerializer extends AbstractSerializer
      * Get the default set of serialized attributes for a model.
      *
      * @param Field|array $model
+     *
      * @return array
      */
     protected function getDefaultAttributes($model)

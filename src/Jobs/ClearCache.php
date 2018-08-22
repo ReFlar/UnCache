@@ -97,7 +97,8 @@ class ClearCache
         return array_values($files);
     }
 
-    public function getAssetDirForPlatform() {
+    public function getAssetDirForPlatform()
+    {
         if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN') {
             return 'assets\\';
         } else {
