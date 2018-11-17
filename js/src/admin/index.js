@@ -12,7 +12,7 @@ app.initializers.add('reflar/uncache', () => {
     extend(AdminNav.prototype, 'items', items => {
         items.add('reflar-uncache', AdminLinkButton.component({
             href: app.route('reflar-uncache'),
-            icon: 'archive',
+            icon: 'fas fa-archive',
             children: 'UnCache',
             description: app.translator.trans('reflar-uncache.admin.nav.desc')
         }));

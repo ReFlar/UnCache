@@ -12,7 +12,7 @@
 
 namespace Reflar\UnCache\Listeners;
 
-use Flarum\Event\ExtensionWasEnabled;
+use Flarum\Extension\Event\Enabled;
 use Illuminate\Contracts\Events\Dispatcher;
 use Reflar\UnCache\Jobs\ClearCache;
 
@@ -23,14 +23,14 @@ class InvalidateCache
      */
     public function subscribe(Dispatcher $events)
     {
-        $events->listen(ExtensionWasEnabled::class, [$this, 'invalidateCache']);
+        $events->listen(Enabled::class, [$this, 'invalidateCache']);
     }
 
     /**
-     * @param ExtensionWasEnabled $event
+     * @param Enabled $event
      */
-    public function invalidateCache(ExtensionWasEnabled $event)
+    public function invalidateCache(Enabled $event)
     {
-        app()->make(ClearCache::class)->clear();
+        app()->make(ClearCache::class)->clear(false);
     }
 }

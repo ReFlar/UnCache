@@ -2,8 +2,8 @@ import app from 'flarum/app';
 import Model from 'flarum/Model';
 import User from 'flarum/models/User';
 
-app.initializers.add('zreflar-uncache', () => {
-    User.prototype.cacheValid = Model.attribute('cache_valid');
+app.initializers.add('reflar-uncache', () => {
+    /** User.prototype.cacheValid = Model.attribute('cache_valid');
 
     if (app.session.user) {
         if (!app.session.user.cacheValid()) {
@@ -15,5 +15,6 @@ app.initializers.add('zreflar-uncache', () => {
             })
 
         }
-    }
-}, -1000000);
+    }**/
+//	Broken until Toby fixes initializers loading before session
+}, -100);

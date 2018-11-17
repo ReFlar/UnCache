@@ -13,7 +13,7 @@
 namespace Reflar\UnCache\Listeners;
 
 use Flarum\Api\Serializer\UserSerializer;
-use Flarum\Event\PrepareApiAttributes;
+use Flarum\Api\Event\Serializing;
 use Illuminate\Contracts\Events\Dispatcher;
 
 class AddUserRelationships
@@ -23,13 +23,13 @@ class AddUserRelationships
      */
     public function subscribe(Dispatcher $events)
     {
-        $events->listen(PrepareApiAttributes::class, [$this, 'prepareApiAttributes']);
+        $events->listen(Serializing::class, [$this, 'prepareApiAttributes']);
     }
 
     /**
-     * @param PrepareApiAttributes $event
+     * @param Serializing $event
      */
-    public function prepareApiAttributes(PrepareApiAttributes $event)
+    public function prepareApiAttributes(Serializing $event)
     {
         if ($event->isSerializer(UserSerializer::class)) {
             $event->attributes['cache_valid'] = $event->actor->cache_valid;

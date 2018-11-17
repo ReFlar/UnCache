@@ -11,7 +11,7 @@
   "type": "flarum-extension",
   "license": "MIT",
   "require": {
-    "flarum/core": "^0.1.0-beta-7",
+    "flarum/core": "^0.1.0-beta-8",
     "guzzlehttp/guzzle": "^6.2.2"
   },
   "authors": [
@@ -31,13 +31,13 @@
     "flarum-extension": {
       "title": "ReFlar UnCache",
       "icon": {
-        "name": "archive",
+        "name": "fas fa-archive",
         "backgroundColor": "#263238",
         "color": "#fff"
       }
     },
     "flagrow": {
-      "discuss": ""
+      "discuss": "https://discuss.flarum.org/d/12399-uncache-by-reflar-no-more-cache-problems"
     }
   }
 }

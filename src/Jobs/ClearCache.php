@@ -12,9 +12,7 @@
 
 namespace Reflar\UnCache\Jobs;
 
-use Flarum\Admin\WebApp as Admin;
-use Flarum\Core\User;
-use Flarum\Forum\WebApp as Forum;
+use Flarum\User\User;
 use Flarum\Settings\SettingsRepositoryInterface;
 use GuzzleHttp\Client;
 use Illuminate\Contracts\Cache\Store;
@@ -27,38 +25,29 @@ class ClearCache
     public $cache;
 
     /**
-     * @var Forum
-     */
-    public $forum;
-
-    /**
-     * @var Admin
-     */
-    public $admin;
-
-    /**
      * @var SettingsRepositoryInterface
      */
     public $settings;
 
-    public function __construct(Store $cache, Forum $forum, Admin $admin, SettingsRepositoryInterface $settings)
+    public function __construct(Store $cache, SettingsRepositoryInterface $settings)
     {
         $this->cache = $cache;
-        $this->forum = $forum;
-        $this->admin = $admin;
         $this->settings = $settings;
     }
 
-    public function clear()
+    public function clear($local = true)
     {
         $files = $this->getAssetUrls();
 
-        @unlink(base_path($this->getAssetDirForPlatform().'rev-manifest.json'));
+		if ($local === true) {
+			@unlink($this->getAssetDir().'rev-manifest.json');
 
-        $this->forum->getAssets()->flush();
-        $this->admin->getAssets()->flush();
-
-        $this->cache->flush();
+			$storagePath = app()->storagePath();
+			array_map('unlink', glob($storagePath.'/formatter/*'));
+			array_map('unlink', glob($storagePath.'/locale/*'));
+			
+			$this->cache->flush();
+		}
 
         User::where('cache_valid', 1)->update(['cache_valid' => 0]);
 
@@ -84,25 +73,24 @@ class ClearCache
 
     public function getAssetUrls()
     {
-        $files = json_decode(file_get_contents(base_path($this->getAssetDirForPlatform().'rev-manifest.json')), true);
+        $files = json_decode(file_get_contents($this->getAssetDir().'rev-manifest.json'), true);
 
         foreach ($files as $key => $file) {
             $place = strstr($key, '.', true);
             $type = strstr($key, '.');
-            $file = $place.'-'.$file.$type;
-            @unlink(base_path($this->getAssetDirForPlatform().$file));
+			$file = $place.'-'.$file.$type;
+			if ($type = '.js') {
+				@unlink($this->getAssetDir().$file.'.map');
+			}
+            @unlink($this->getAssetDir().$file);
             $files[$key] = app('flarum.config')['url'].'/assets/'.$file;
         }
 
         return array_values($files);
     }
 
-    public function getAssetDirForPlatform()
+    public function getAssetDir()
     {
-        if (strtoupper(substr(PHP_OS, 0, 3)) == 'WIN') {
-            return 'assets\\';
-        } else {
-            return 'assets/';
-        }
+        return app()->publicPath().'/assets/';
     }
 }

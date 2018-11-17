@@ -12,13 +12,13 @@
 
 namespace Reflar\UnCache\Api\Controllers;
 
-use Flarum\Api\Controller\AbstractResourceController;
-use Flarum\Core\Access\AssertPermissionTrait;
+use Flarum\Api\Controller\AbstractShowController;
+use Flarum\User\AssertPermissionTrait;
 use Psr\Http\Message\ServerRequestInterface;
 use Reflar\UnCache\Jobs\ClearCache;
 use Tobscure\JsonApi\Document;
 
-class InvalidateCacheController extends AbstractResourceController
+class InvalidateCacheController extends AbstractShowController
 {
     use AssertPermissionTrait;
 

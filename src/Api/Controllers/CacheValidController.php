@@ -21,7 +21,7 @@ class CacheValidController extends AbstractCreateController
     /**
      * {@inheritdoc}
      */
-    public $serializer = 'Flarum\Api\Serializer\UserBasicSerializer';
+    public $serializer = 'Flarum\Api\Serializer\BasicUserSerializer';
 
     /**
      * @param ServerRequestInterface $request
