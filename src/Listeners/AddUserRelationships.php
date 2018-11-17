@@ -12,8 +12,8 @@
 
 namespace Reflar\UnCache\Listeners;
 
-use Flarum\Api\Serializer\UserSerializer;
 use Flarum\Api\Event\Serializing;
+use Flarum\Api\Serializer\UserSerializer;
 use Illuminate\Contracts\Events\Dispatcher;
 
 class AddUserRelationships

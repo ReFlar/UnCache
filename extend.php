@@ -22,12 +22,12 @@ return [
         ->js(__DIR__.'/js/dist/admin.js'),
     (new Extend\Frontend('forum'))
         ->js(__DIR__.'/js/dist/forum.js'),
-	new Extend\Locales(__DIR__.'/resources/locale'),
-	(new Extend\Routes('api'))
+    new Extend\Locales(__DIR__.'/resources/locale'),
+    (new Extend\Routes('api'))
         ->post('/uncache/validate', 'uncache.validate', Controllers\CacheValidController::class)
         ->post('/uncache/invalidate', 'uncache.invalidate', Controllers\InvalidateCacheController::class),
-	function (Dispatcher $events) {
-		$events->subscribe(Listeners\AddUserRelationships::class);
-		$events->subscribe(Listeners\InvalidateCache::class);
-	},
+    function (Dispatcher $events) {
+        $events->subscribe(Listeners\AddUserRelationships::class);
+        $events->subscribe(Listeners\InvalidateCache::class);
+    },
 ];

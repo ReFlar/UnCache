@@ -12,8 +12,8 @@
 
 namespace Reflar\UnCache\Jobs;
 
-use Flarum\User\User;
 use Flarum\Settings\SettingsRepositoryInterface;
+use Flarum\User\User;
 use GuzzleHttp\Client;
 use Illuminate\Contracts\Cache\Store;
 
@@ -39,15 +39,15 @@ class ClearCache
     {
         $files = $this->getAssetUrls();
 
-		if ($local === true) {
-			@unlink($this->getAssetDir().'rev-manifest.json');
+        if ($local === true) {
+            @unlink($this->getAssetDir().'rev-manifest.json');
 
-			$storagePath = app()->storagePath();
-			array_map('unlink', glob($storagePath.'/formatter/*'));
-			array_map('unlink', glob($storagePath.'/locale/*'));
-			
-			$this->cache->flush();
-		}
+            $storagePath = app()->storagePath();
+            array_map('unlink', glob($storagePath.'/formatter/*'));
+            array_map('unlink', glob($storagePath.'/locale/*'));
+
+            $this->cache->flush();
+        }
 
         User::where('cache_valid', 1)->update(['cache_valid' => 0]);
 
@@ -78,10 +78,10 @@ class ClearCache
         foreach ($files as $key => $file) {
             $place = strstr($key, '.', true);
             $type = strstr($key, '.');
-			$file = $place.'-'.$file.$type;
-			if ($type = '.js') {
-				@unlink($this->getAssetDir().$file.'.map');
-			}
+            $file = $place.'-'.$file.$type;
+            if ($type = '.js') {
+                @unlink($this->getAssetDir().$file.'.map');
+            }
             @unlink($this->getAssetDir().$file);
             $files[$key] = app('flarum.config')['url'].'/assets/'.$file;
         }
